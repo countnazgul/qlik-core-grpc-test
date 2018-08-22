@@ -1,2 +1,3 @@
-# qlik-core-grpc-test
-First try to go a bit deeper in understanding how to write grpc connectors for qlik (core)
+Just a test connector
+
+At the moment is copy of the original MongoDB connector but the source is changed to simple api. More work needed!

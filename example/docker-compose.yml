@@ -1,0 +1,37 @@
+version: "3.3"
+
+services:
+  #mongodb-database:
+  #  container_name: mongodb-database
+  #  build: ./mongodb-image
+  #  ports:
+  #    - 27017:27017
+  #  environment:
+  #    - MONGO_INITDB_ROOT_USERNAME=admin
+  #    - MONGO_INITDB_ROOT_PASSWORD=password
+  #    - MONGO_INITDB_DATABASE=test
+  qix-engine:
+    container_name: qix-engine
+    image: qlikcore/engine:12.215.0
+    #links:
+    #  - mongodb-grpc-connector
+    ports:
+      - 9076:9076
+      - 9090:9090
+    command: -S AcceptEULA=yes -S SystemLogVerbosity=5 -S EnableGrpcCustomConnectors=1 -S GrpcConnectorPlugins="mongodb-grpc-connector,mongodb-grpc-connector:50051" -S EnableConnectivityService=0 -N
+  #mongodb-grpc-connector:
+  #  container_name: mongodb-grpc-connector
+  #  build: ../
+  #  links:
+  #    - mongodb-database
+  #  ports:
+  #    - 50051:50051
+  #node-test-runner:
+  #  container_name: node-test-runner
+  #  image: node:8
+  #  working_dir: /reload-runner
+  #  # Not working in circleCI, using cp instead to get test files
+  #  volumes:
+  #    - ./reload-runner:/reload-runner
+  #  # Creating node busybox
+  #  command: "sh -c 'while :; do ping -c 1 google.com; sleep 60; done'"
